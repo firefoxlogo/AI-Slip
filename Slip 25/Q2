@@ -1,0 +1,63 @@
+from collections import deque
+
+def print_board(state):
+    for row in state:
+        print(row)
+    print()
+
+def get_blank_position(state):
+    for i, row in enumerate(state):
+        if 0 in row:
+            return i, row.index(0)
+
+def get_neighbors(state):
+    i, j = get_blank_position(state)
+    neighbors = []
+
+    for move in [(0, 1), (1, 0), (0, -1), (-1, 0)]:
+        ni, nj = i + move[0], j + move[1]
+        if 0 <= ni < 3 and 0 <= nj < 3:
+            new_state = [row[:] for row in state]
+            new_state[i][j], new_state[ni][nj] = new_state[ni][nj], new_state[i][j]
+            neighbors.append(new_state)
+
+    return neighbors
+
+def is_goal(state, goal_state):
+    return state == goal_state
+
+def bfs(initial_state, goal_state):
+    visited = set()
+    queue = deque([(initial_state, [])])
+
+    while queue:
+        current_state, path = queue.popleft()
+
+        if is_goal(current_state, goal_state):
+            print("Solution:")
+            for move in path:
+                print(move)
+            return
+
+        visited.add(tuple(map(tuple, current_state)))
+
+        for neighbor in get_neighbors(current_state):
+            if tuple(map(tuple, neighbor)) not in visited:
+                queue.append((neighbor, path + [neighbor]))
+
+    print("No solution found.")
+
+# Example usage:
+initial_state = [
+    [1, 2, 3],
+    [0, 4, 6],
+    [7, 5, 8]
+]
+
+goal_state = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 0]
+]
+
+bfs(initial_state, goal_state)
