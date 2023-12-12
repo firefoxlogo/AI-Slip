@@ -1,4 +1,5 @@
-d = {
+
+graph = {
     '1': ['2', '3'],
     '2': ['1', '4', '5'],
     '3': ['1', '6', '7'],
@@ -9,17 +10,28 @@ d = {
     '8': ['4', '5', '6', '7']
 }
 
-visited=[]
-queue=[]
-def bfs(d,visited,node):
-	visited.append(node)
-	queue.append(node)
-	while queue:
-		p=queue.pop(0)
-		print(p)
-		for neigh in d[p]:
-			if neigh not in visited:
-				visited.append(neigh)
-				queue.append(neigh)
-print("BFS=>")
-bfs(d,visited,'1')
+def bfs(graph, start, goal):
+    visited = []
+    queue = []
+    visited.append(start)
+    queue.append(start)
+
+    while queue:
+        current = queue.pop(0)
+        print(current)
+
+        if current == goal:
+            print("Goal state reached!")
+            return
+
+        for neighbor in graph[current]:
+            if neighbor not in visited:
+                visited.append(neighbor)
+                queue.append(neighbor)
+
+
+start_node = '1'
+goal_node = input("Enter the goal state: ")
+
+print("BFS:")
+bfs(graph, start_node, goal_node)
