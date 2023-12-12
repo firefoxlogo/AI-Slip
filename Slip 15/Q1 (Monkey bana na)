@@ -1,0 +1,45 @@
+class MonkeyBananaProblem:
+    def __init__(self):
+        self.monkey_position = 'A'
+        self.banana_position = 'B'
+        self.box_position = 'C'
+
+    def display_state(self):
+        print(f"Monkey is at: {self.monkey_position}")
+        print(f"Banana is at: {self.banana_position}")
+        print(f"Box is at: {self.box_position}")
+        print()
+
+    def move_monkey(self, direction):
+        self.monkey_position = direction
+
+    def move_box(self, direction):
+        self.box_position = direction
+
+    def climb_box(self):
+        if self.monkey_position == self.box_position:
+            print("Monkey climbs on the box.")
+            self.monkey_position = 'C'
+        else:
+            print("Monkey cannot climb the box because it's not at the same position.")
+
+    def grab_banana(self):
+        if self.monkey_position == self.banana_position == 'C':
+            print("Monkey grabs the banana! Hooray!")
+        else:
+            print("Monkey cannot grab the banana. Make sure both the monkey and banana are on the box.")
+
+# Example usage:
+monkey_problem = MonkeyBananaProblem()
+
+monkey_problem.display_state()
+monkey_problem.move_monkey('B')
+monkey_problem.display_state()
+
+monkey_problem.move_box('A')
+monkey_problem.display_state()
+
+monkey_problem.climb_box()
+monkey_problem.display_state()
+
+monkey_problem.grab_banana()
