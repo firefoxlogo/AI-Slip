@@ -1,4 +1,5 @@
-d = {
+
+graph = {
     '1': ['2', '3'],
     '2': ['1', '4', '5'],
     '3': ['1', '6', '7'],
@@ -8,14 +9,21 @@ d = {
     '7': ['3', '8'],
     '8': ['4', '5', '6', '7']
 }
+def dfs(graph, visited, node, goal):
+    if node not in visited:
+        print(node)
+        visited.add(node)
+        if node == goal:
+            print("Goal state reached!")
+            return
+        for neighbor in graph[node]:
+            dfs(graph, visited, neighbor, goal)
 
-visited=set()
 
-def dfs(d,visited,node):
-	if node not in visited:
-		print(node)
-		visited.add(node)
-		for neigh in d[node]:
-			dfs(d,visited,neigh)
-print("DFS=>")
-dfs(d,visited,'1')
+visited = set()
+
+start_node = '1'
+goal_node = input("Enter the goal state: ")
+
+print("DFS:")
+dfs(graph, visited, start_node, goal_node)
