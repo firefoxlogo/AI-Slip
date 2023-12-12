@@ -1,0 +1,26 @@
+def mean_end_analysis(initial, goal):
+    current_state = list(initial)
+    goal_state = list(goal)
+    steps = []
+
+    while current_state != goal_state:
+        for i in range(len(current_state)):
+            diff = ord(goal_state[i]) - ord(current_state[i])
+            if diff != 0:
+                current_state[i] = chr(ord(current_state[i]) + diff)
+                steps.append(f"Change character at position {i} to {current_state[i]}")
+                break
+
+    return steps
+
+# Get user input for initial and goal states
+initial_state = input("Enter the initial state (lowercase letters): ")
+goal_state = input("Enter the goal state (lowercase letters): ")
+
+result_steps = mean_end_analysis(initial_state, goal_state)
+
+print(f"Initial State: {initial_state}")
+print(f"Goal State   : {goal_state}")
+print("Steps to transform:")
+for step in result_steps:
+    print(step)
