@@ -1,0 +1,51 @@
+def iterative_deepening_dfs(graph, start, goal):
+    depth_limit = 0
+
+    while True:
+        result = depth_limited_dfs(graph, start, goal, depth_limit)
+        if result is not None:
+            return result
+        depth_limit += 1
+
+def depth_limited_dfs(graph, current, goal, depth_limit, visited=None, path=None):
+    visited = set() if visited is None else visited
+    path = [] if path is None else path
+
+    if current == goal:
+        return path + [current]
+
+    if depth_limit == 0 or current in visited:
+        return None
+
+    visited.add(current)
+
+    for neighbor in graph.get(current, []):
+        new_path = depth_limited_dfs(graph, neighbor, goal, depth_limit - 1, visited, path + [current])
+        if new_path is not None:
+            return new_path
+
+    return None
+
+# Example usage:
+graph = {
+    'A': ['B', 'C'],
+    'B': ['A', 'D', 'E'],
+    'C': ['A', 'F', 'G'],
+    'D': ['B', 'H', 'I'],
+    'E': [],
+    'F': ['C', 'K'],
+    'G': [],
+    'H': [],
+    'I': [],
+    'K': []
+}
+
+start_node = 'A'
+goal_node = 'G'
+
+result_path = iterative_deepening_dfs(graph, start_node, goal_node)
+
+if result_path is not None:
+    print(f"Path from {start_node} to {goal_node}: {result_path}")
+else:
+    print(f"No path found from {start_node} to {goal_node}.")
