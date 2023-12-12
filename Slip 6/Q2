@@ -1,25 +1,37 @@
-d = {
+def bfs(graph, start, goal):
+    visited = []
+    queue = []
+    visited.append(start)
+    queue.append(start)
+
+    while queue:
+        current = queue.pop(0)
+        print(current)
+
+        if current == goal:
+            print("Goal state reached!")
+            return
+
+        for neighbor in graph.get(current, []):
+            if neighbor not in visited:
+                visited.append(neighbor)
+                queue.append(neighbor)
+
+    print(f"Goal state '{goal}' not found in the graph.")
+
+# Example usage:
+graph = {
     '1': ['2', '3'],
     '2': ['4'],
     '3': ['2'],
-    '4': ['6','5'],
-    '5': ['3','7'],
+    '4': ['6', '5'],
+    '5': ['3', '7'],
     '6': ['3'],
     '7': ['6'],
-    
 }
 
-visited=[]
-queue=[]
-def bfs(d,visited,node):
-	visited.append(node)
-	queue.append(node)
-	while queue:
-		p=queue.pop(0)
-		print(p)
-		for neigh in d[p]:
-			if neigh not in visited:
-				visited.append(neigh)
-				queue.append(neigh)
-print("BFS=>")
-bfs(d,visited,'1')
+start_node = '1'
+goal_node = input("Enter the goal state: ")
+
+print("BFS:")
+bfs(graph, start_node, goal_node)
