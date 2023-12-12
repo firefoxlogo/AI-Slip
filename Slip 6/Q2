@@ -1,3 +1,14 @@
+
+graph = {
+    '1': ['2', '3'],
+    '2': ['4'],
+    '3': ['2'],
+    '4': ['6', '5'],
+    '5': ['3', '7'],
+    '6': ['3'],
+    '7': ['6'],
+}
+
 def bfs(graph, start, goal):
     visited = []
     queue = []
@@ -19,16 +30,6 @@ def bfs(graph, start, goal):
 
     print(f"Goal state '{goal}' not found in the graph.")
 
-# Example usage:
-graph = {
-    '1': ['2', '3'],
-    '2': ['4'],
-    '3': ['2'],
-    '4': ['6', '5'],
-    '5': ['3', '7'],
-    '6': ['3'],
-    '7': ['6'],
-}
 
 start_node = '1'
 goal_node = input("Enter the goal state: ")
