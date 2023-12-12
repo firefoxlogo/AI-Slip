@@ -1,0 +1,40 @@
+from datetime import date
+from datetime import datetime
+import math
+
+college_info = {
+    "date": "",
+    "time": "",
+    "fine": "I am also fine. How can I help you?",
+    "fee_structure": "The fee structure for different courses can be obtained from the college administration.",
+    "subjects": "The college offers a variety of subjects, including Computer Science, Physics, Mathematics, Biology, and more.",
+    "degrees": "The college provides degrees in Engineering, Science, Arts, and Commerce.",
+    "contactus": "For more detailed information, you can contact the college administration at admin@examplecollege.com.",
+    "admission": "The admission process typically involves submitting an application, appearing for an entrance exam, and attending an interview.",
+    "campus": "The college campus provides facilities such as libraries, labs, sports complexes, and hostel accommodation.",
+    "placement": "The college has a strong track record of placements, with many students securing positions in reputable companies.",
+    "extracurricular": "Students can participate in various extracurricular activities, including clubs, sports, and cultural events.",
+}
+
+print("Hi, I am your College Information Chatbot (Version 1.0)")
+user_name = input("What's your name? => ")
+print("Hi {}, how can I assist you today?".format(user_name))
+print("I can provide information on the following topics:")
+for topic in college_info.keys():
+    print(topic)
+
+while True:
+    user_input = input("Enter your question: ")
+    if user_input in college_info.keys():
+        if user_input == "date":
+            print("Today is:", date.today())
+        elif user_input == "time":
+            current_time = datetime.now()
+            print("Current time is:", current_time.strftime("%H:%M:%S"))
+        elif user_input in college_info:
+            print(college_info[user_input])
+    else:
+        print("Unable to understand your question.")
+        print("I can provide information on the following topics:")
+        for topic in college_info.keys():
+            print(topic)
